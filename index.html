@@ -84,7 +84,6 @@
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");
-	var geolocation = new BMap.Geolocation();
 	map.centerAndZoom(new BMap.Point(108.060507519381,30.1159526016991), 8);
 	map.addControl(new BMap.NavigationControl());
 	map.addControl(new BMap.OverviewMapControl());
@@ -1301,26 +1300,4 @@
 	}
     // 添加点聚合效果
 	var markerClusterer = new BMapLib.MarkerClusterer(map, {markers: markers});
-	geolocation.getCurrentPosition(function(result){
-			if(this.getStatus() == BMAP_STATUS_SUCCESS){
-					/*Maker类表示地图上一个图像标注。
-					*构造函数：Maker(point: Point, opts: MarkerOptions)  创建一个图像标注实例。
-					*point参数指定了图像标注所在的地理位置；opts为可选参数。
-					*/
-					var mk = new BMap.Marker(result.point);
-					/*核心类Map的方法：
-					*addOverlay——将覆盖物添加到地图中，一个覆盖物实例只能向地图中添加一次
-					*panTo——将地图的中心点更改为给定的点。
-					*/
-					map.addOverlay(mk);
-					map.panTo(result.point);
-					/*Point类表示一个地理坐标点。
-					*构造函数：Point(lng,lat)    以指定的经度和纬度创建一个地理点坐标。
-					*该类有两个属性：lng 地理经度 lat 地理纬度
-					*/
-					alert("您当前所在位置的经度是：" + result.point.lng + "，纬度是：" + result.point.lat);
-			}else{
-					alert("定位失败！" + this.getStatus());
-			}
-	});
 </script>
