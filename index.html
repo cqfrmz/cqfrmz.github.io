@@ -47,7 +47,7 @@
 	ZoomControl.prototype.initialize = function(map){
 	 // 创建一个DOM元素
 	 var div = document.createElement("div");
-	 div.innerHTML = '<div id="r-result" align="left" style="background-color:#DDF6DD">温馨提醒：<p>1.数据来源重庆市卫生健康委员会官网于2022年12月13日发布的《重庆市发热门诊（诊室）设置一览表》，点击可<a href="http://wsjkw.cq.gov.cn/ztzl_242/qlzhxxgzbdfyyqfkgz/fyfw/frmz/202212/t20221213_11381573.html" target="_blank">查看原文</a>。<p>2.位置信息基于《重庆市发热门诊（诊室）设置一览表》中"医疗机构名称"通过百度地图接口获取，少量位置可能存在漂移，请知晓。点击<a href="https://work.weixin.qq.com/kfid/kfcb9893f461534abb5"target="_blank">这里</a>反馈，我为人人，人人为我。<p>3.您可以点击左下角“点位”<img src="images/location.png" alt="Google Chrome" width="24" height="24">并授权后，快速查找您当前位置附近的门诊。位置信息仅用于百度地图接口使用，服务器不收集、不存储。请放心使用。<p>4.使用说明：<img src="images/Y.png" alt="Google Chrome" width="24" height="24">为接诊发热儿童机构，<img src="images/N.png" alt="Google Chrome" width="24" height="24">为不接诊发热儿童机构。点击查看详情，电话号码可直接点击拨打。</div>';
+	 div.innerHTML = '<div id="r-result" align="left" style="background-color:#DDF6DD">温馨提醒：<p>1.数据来源重庆市卫生健康委员会官网于2022年12月13日发布的《重庆市发热门诊（诊室）设置一览表》，点击可<a href="http://wsjkw.cq.gov.cn/ztzl_242/qlzhxxgzbdfyyqfkgz/fyfw/frmz/202212/t20221213_11381573.html" target="_blank">查看原文</a>。<p>2.位置信息基于《重庆市发热门诊（诊室）设置一览表》中"医疗机构名称"通过百度地图接口获取，少量位置可能存在漂移，请知晓。点击<a href="https://work.weixin.qq.com/kfid/kfcb9893f461534abb5"target="_blank">这里</a>反馈，我为人人，人人为我。<p>3.您可以点击左下角“点位”<img src="images/location.png" alt="Google Chrome" width="24" height="24">并授权后，快速查找您当前位置附近的门诊。位置信息仅用于百度地图接口使用，服务器不收集、不存储。请放心使用。<p>4.使用说明：<img src="images/baby.png" alt="Google Chrome" width="24" height="24">为接诊发热儿童机构，<img src="images/others.png" alt="Google Chrome" width="24" height="24">为不接诊发热儿童机构。点击查看详情，电话号码可直接点击拨打。</div>';
 
 	 // 添加DOM元素到地图中
 	 map.getContainer().appendChild(div);
@@ -1231,8 +1231,8 @@
 	var markers = [];
   $.each(points, function (i, item) {
         var point = new BMap.Point(item.lng, item.lat);
-			  var babyIcon = new BMap.Icon("images/Y.png", new BMap.Size(40, 40));
-				var otherIcon = new BMap.Icon("images/N.png", new BMap.Size(40, 40));
+			  var babyIcon = new BMap.Icon("images/baby.png", new BMap.Size(40, 40));
+				var otherIcon = new BMap.Icon("images/others.png", new BMap.Size(40, 40));
 				if (item.type == "Y"){
 					myIcon=babyIcon
 				}
