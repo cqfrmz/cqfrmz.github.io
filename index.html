@@ -10,21 +10,81 @@
 			width: 100%;
 		}
 		p{margin-left:5px; font-size:14px;}
+		#up-map-div{
+		width:300px;
+		top:8px;
+		left:0px;
+		position:absolute;
+		z-index:9999;
+		}
+		.MenuPanel
+		{
+				padding-bottom:0px;
+		}
+		.MenuTitle
+		{
+				width:100%;
+				height:30px;
+				font-size:20px;
+				padding-left:8px;
+				cursor:pointer;
+		}
+		.MenuContent
+		{
+				width:100%;
+				font-size:16px;
+				padding:10px 10px 10px 10px;
+				background-color: #ffbc66;
+		}
 	</style>
 	<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=nX6UvXDNZGiVZcDojGb3GNYabhgr7XWU"></script>
 	<script type="text/javascript" src="js/TextIconOverlay_min.js"></script>
 	<script type="text/javascript" src="js/MarkerClusterer_min.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function(){
+					$(".MenuPanel").each(function(){
+							$(this).children(".MenuContent").show();
+					});
+
+					$(".MenuTitle").each(function(){
+							$(this).click(function(){
+
+									if($(this).parents(".MenuPanel").children(".MenuContent").css("display") != "none"){
+											$(this).parents(".MenuPanel").children(".MenuContent").slideUp();
+									}else{
+											$(this).parents(".MenuPanel").children(".MenuContent").slideDown();
+									}
+							});
+
+					});
+
+			});
+
+
+	</script>
 	<title>重庆市发热门诊地图</title>
 </head>
 <body>
 	<div id="allmap"></div>
+	<div id="up-map-div">
+		<div class="MenuPanel">
+			<div class="MenuTitle"><img src="images/massage.png"  width="48" height="48"></div>
+			<div class="MenuContent">
+				温馨提醒：<p>
+				1.数据来源重庆市卫生健康委员会官网于2022年12月13日发布的《重庆市发热门诊（诊室）设置一览表》，点击可<a href="http://wsjkw.cq.gov.cn/ztzl_242/qlzhxxgzbdfyyqfkgz/fyfw/frmz/202212/t20221213_11381573.html" target="_blank">查看原文</a>。<p>
+				2.位置信息基于《重庆市发热门诊（诊室）设置一览表》中"医疗机构名称"通过百度地图接口获取，少量位置可能存在漂移，请知晓。点击<a href="https://support.qq.com/product/484551"target="_blank">这里</a>反馈，我为人人，人人为我。<p>
+				3.您可以点击左下角“点位”<img src="images/location.png"  width="20" height="20">并授权后，快速查找您当前位置附近的门诊。位置信息仅用于百度地图接口使用，服务器不收集、不存储。请放心使用。<p>
+				4.<img src="images/baby.png"  width="20" height="20">为接诊发热儿童机构，<img src="images/others.png"  width="24" height="24">为不接诊发热儿童机构。点击查看详情，电话号码可直接点击拨打。<p>
+				5.点击左上角<img src="images/massage.png"  width="20" height="20">可关闭本提示信息。
+			</div>
+		</div>
 </body>
 </html>
 <script type="text/javascript">
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(107.658478,30.725042), 8);
+	map.centerAndZoom(new BMap.Point(108.060507519381,30.1159526016991), 8);
 	//地图初始化中心点和层级
 	map.addControl(new BMap.NavigationControl());
 	//map.addControl(new BMap.ScaleControl());
@@ -33,35 +93,7 @@
 	map.addControl(new BMap.GeolocationControl());
 	//map.addControl(new BMap.MapTypeControl());
 	//默认为NORMAL，可选HYBRID
-	map.enableScrollWheelZoom(true);
-	//滚轮缩放
-	map.enableScrollWheelZoom(true);
-	map.enableScrollWheelZoom(true);
-	function ZoomControl() {
-	 this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
-	 this.defaultOffset = new BMap.Size(60, 20);
-	}
-
-	// 通过JavaScript的prototype属性继承于BMap.Control
-	ZoomControl.prototype = new BMap.Control();
-
-	// 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
-	// 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
-	ZoomControl.prototype.initialize = function(map){
-	 // 创建一个DOM元素
-	 var div = document.createElement("div");
-	 div.innerHTML = '<div id="r-result" align="left" style="background-color:#DDF6DD">温馨提醒：<p>1.数据来源重庆市卫生健康委员会官网于2022年12月13日发布的《重庆市发热门诊（诊室）设置一览表》，点击可<a href="http://wsjkw.cq.gov.cn/ztzl_242/qlzhxxgzbdfyyqfkgz/fyfw/frmz/202212/t20221213_11381573.html" target="_blank">查看原文</a>。<p>2.位置信息基于《重庆市发热门诊（诊室）设置一览表》中"医疗机构名称"通过百度地图接口获取，少量位置可能存在漂移，请知晓。点击<a href="https://work.weixin.qq.com/kfid/kfcb9893f461534abb5"target="_blank">这里</a>反馈，我为人人，人人为我。<p>3.您可以点击左下角“点位”<img src="images/location.png" alt="Google Chrome" width="24" height="24">并授权后，快速查找您当前位置附近的门诊。位置信息仅用于百度地图接口使用，服务器不收集、不存储。请放心使用。<p>4.使用说明：<img src="images/baby.png" alt="Google Chrome" width="24" height="24">为接诊发热儿童机构，<img src="images/others.png" alt="Google Chrome" width="24" height="24">为不接诊发热儿童机构。点击查看详情，电话号码可直接点击拨打。</div>';
-
-	 // 添加DOM元素到地图中
-	 map.getContainer().appendChild(div);
-	 // 将DOM元素返回
-	 return div;
-	}
-
-	// 创建控件
-	var myZoomCtrl = new ZoomControl();
-	// 添加到地图当中
-	map.addControl(myZoomCtrl);
+	//map.enableScrollWheelZoom(true);
 	var points = [{"name":"重庆大学附属三峡医院（总院）","phone":"58103062","type":"N","notice":"无","lng":108.390335658563,"lat":30.8100390171486,"id":1},
 	{"name":"重庆大学附属三峡医院（江南院区）","phone":"58962037","type":"Y","notice":"接诊发热儿童","lng":108.419174,"lat":30.816068,"id":2},
 	{"name":"重庆三峡医专附属中医院","phone":"85787012","type":"N","notice":"无","lng":108.386987,"lat":30.78688,"id":3},
